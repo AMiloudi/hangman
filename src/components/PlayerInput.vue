@@ -70,9 +70,10 @@ export default {
       this.checkWinnerOrLoser();
     },
     checkWinnerOrLoser() {
+      let wrongLettersArray = this.pickedLetters.filter((l) => !this.charArray.includes(l));
       if (this.charArray.every(c => this.pickedLetters.includes(c))) {
         this.$store.state.showWinnerMessage = true;
-      } else if (this.pickedLetters.length > 9) {
+      } else if (wrongLettersArray.length > 9) {
         this.$store.state.showLoserMessage = true;
       }
     },
