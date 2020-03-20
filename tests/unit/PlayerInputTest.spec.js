@@ -4,7 +4,6 @@ import merge from 'lodash/merge';
 import defaultStoreConfig from '../../src/store/index';
 import PlayerInput from '../../src/components/PlayerInput';
 import { winnerData, loserData } from './PlayerData';
-//import flushPromises from 'flush-promises';
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -22,34 +21,29 @@ function createStore(overrides) {
 function createWrapper(overrides) {                                            
     const defaultMountingOptions = {                                             
       mocks: {                                                                   
-     //   $route: {                                                                
-     //     path: '/checkout/cart/',                                               
-     //   },                                                                       
         mutations: {                                                                  
           setCharArray: jest.fn()
-     //     //  updateCart: jest.fn(() => Promise.resolve()),                      
         },                                                                       
       },                                                                         
       localVue,                                                                  
-     // stubs: ['no-ssr'],                                                      
-     // stubs: {                                                                   
-     //   NuxtLink: RouterLinkStub,                                                
-      };                                                                         
+    };
     return shallowMount( PlayerInput , merge(defaultMountingOptions, overrides))  
   }                                   
 
-it('shows winner message', () => {
+it('shows revanche button when winner', () => {
     const store = createStore(winnerData);
     const wrapper = createWrapper({
       store,
-      // mocks,
     });
+    let button = wrapper.find('.button')
+    expect(button.text()).toBe('Revanche!');
   });
 
-it('shows loser message', () => {
+it('shows give up button when loser', () => {
     const store = createStore(loserData);
     const wrapper = createWrapper({
       store,
-      // mocks,
     });
+    let button = wrapper.find('.button')
+    expect(button.text()).toBe('Give up');
   });

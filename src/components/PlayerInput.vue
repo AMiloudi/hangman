@@ -7,16 +7,16 @@
     </div>
     <div class="col12 clear">
       <button
-        v-if="this.showLoserMessage || this.showWinnerMessage"
+        v-if="showLoserMessage || showWinnerMessage"
         class="button"
         @click="resetState"
       >
-        Stop game
+        {{ showLoserMessage ? 'Give up' : 'Revanche!'}}
       </button>
     </div>
     <div
       class="col12 clear"
-      v-if="!(this.showLoserMessage || this.showWinnerMessage)"
+      v-if="!(showLoserMessage || showWinnerMessage)"
     >
       <div class="col12">
         <button
